@@ -1,7 +1,7 @@
 const {template, types: t} = require('@babel/core');
 
 const buildInjection = template(`
-  var injectors = this.constructor.INJECTORS;
+  var injectors = CLASS.INJECTORS;
 
   if (Array.isArray(injectors)) {
     for (const inject of injectors) {
@@ -41,7 +41,6 @@ const defaultInjectorsPropName = '__injectors';
 
 const defaultState = {
   isExtended: false,
-  type: null,
 };
 
 const babelPluginInjectDecoratorInitializer = () => ({
@@ -49,25 +48,28 @@ const babelPluginInjectDecoratorInitializer = () => ({
     this.state = defaultState;
   },
   visitor: {
-    Class(path) {
+    Class(path, {opts}) {
       if (!hasClassDecorators(path.node) && !hasMethodDecorators(path.node.body.body)) {
         return;
       }
 
+      const injection = buildInjection({
+        CLASS: t.cloneNode(path.node.id),
+        INJECTORS: opts.injectorsPropName || defaultInjectorsPropName,
+      });
+
       this.state = {
+        injection,
         isExtended: isExtended(path.node),
         type: hasConstructor(path.node.body.body) ? 'ClassMethod' : 'ClassBody',
       };
     },
-    ClassBody(path, {opts}) {
+    ClassBody(path) {
       if (this.state.type !== 'ClassBody') {
         return;
       }
 
-      const injection = buildInjection({
-        INJECTORS: opts.injectorsPropName || defaultInjectorsPropName,
-      });
-      const constructorInjection = buildConstructor(injection, this.state.isExtended);
+      const constructorInjection = buildConstructor(this.state.injection, this.state.isExtended);
       const body = [constructorInjection, ...path.node.body];
 
       const replacement = Object.assign(t.cloneNode(path.node), {body});
@@ -77,21 +79,17 @@ const babelPluginInjectDecoratorInitializer = () => ({
       this.state = defaultState;
     },
 
-    ClassMethod(path, {opts}) {
+    ClassMethod(path) {
       if (this.state.type !== 'ClassMethod' || !isConstructor(path.node)) {
         return;
       }
-
-      const injection = buildInjection({
-        INJECTORS: opts.injectorsPropName || defaultInjectorsPropName,
-      });
 
       let isInjected = false;
       const newMembers = path.node.body.body.reduce((acc, member) => {
         acc.push(t.cloneNode(member));
 
         if (isSuperCall(member)) {
-          acc.push(...injection);
+          acc.push(...this.state.injection);
           isInjected = true;
         }
 
@@ -99,7 +97,7 @@ const babelPluginInjectDecoratorInitializer = () => ({
       }, []);
 
       if (!isInjected) {
-        newMembers.unshift(...injection);
+        newMembers.unshift(...this.state.injection);
       }
 
       const replacement = Object.assign(t.cloneNode(path.node), {

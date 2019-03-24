@@ -31,6 +31,18 @@ describe('babel-plugin-inject-decorator-initializer', () => {
     it('does not break the order of constructor statements', async () => {
       await execute('extended-with-call-before-super');
     });
+
+    it('does not break other class memebers', async () => {
+      await execute('keep-class-members');
+    });
+
+    it('works with multiple classes', async () => {
+      await execute('multiple-classes');
+    });
+
+    it('runs both extending class and super class injections', async () => {
+      await execute('super-injections');
+    });
   });
 
   it('runs injections before user-defined constructor', async () => {
