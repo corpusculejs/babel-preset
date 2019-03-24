@@ -1,0 +1,16 @@
+{
+  "extends": ["eslint-config-poetez", "plugin:prettier/recommended"],
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "rules": {
+    "global-require": "off",
+    "func-names": "off",
+    "max-classes-per-file": "off",
+    "no-invalid-this": "off",
+    "no-eval": "off",
+    "prefer-arrow-callback": "off"
+  }
+}
