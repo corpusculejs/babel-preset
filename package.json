@@ -2,7 +2,7 @@
   "name": "babel-preset-corpuscule",
   "version": "0.1.0",
   "description": "A babel preset to develop Corpuscule project smoothly",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint {src,__tests__}/**/*.js",
     "lint-staged": "lint-staged",
@@ -10,6 +10,9 @@
     "test:coverage": "npm run test:single -- --coverage",
     "test:single": "jest -c jest.config.js"
   },
+  "files": [
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/corpusculejs/babel-preset-corpuscule.git"
