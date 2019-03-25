@@ -2,7 +2,7 @@
   "name": "@corpuscule/babel-preset",
   "version": "0.1.0",
   "description": "A babel preset to develop Corpuscule project smoothly",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint {src,__tests__}/**/*.js",
     "lint-staged": "lint-staged",
@@ -11,7 +11,7 @@
     "test:single": "jest -c jest.config.js"
   },
   "files": [
-    "src"
+    "lib"
   ],
   "repository": {
     "type": "git",
