@@ -43,6 +43,10 @@ describe('babel-plugin-inject-decorator-initializer', () => {
     it('runs both extending class and super class injections', async () => {
       await execute('super-injections');
     });
+
+    it('works with property decorators', async () => {
+      await execute('property-decorators');
+    });
   });
 
   it('runs injections before user-defined constructor', async () => {
