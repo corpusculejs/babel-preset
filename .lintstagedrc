@@ -1,3 +1,4 @@
 {
-  "packages/**/*.js": ["prettier --write", "eslint --fix", "git add"]
+  "__tests__/**/*.js": ["prettier --write", "eslint --fix", "git add"],
+  "lib/**/*.js": ["prettier --write", "eslint --fix", "git add"]
 }

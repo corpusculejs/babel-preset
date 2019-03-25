@@ -11,10 +11,7 @@ const compare = async fixture => {
   const options = getOptions(fixture);
   const fixtureDir = resolve(__dirname, 'fixtures', fixture);
 
-  const {code: inputCode} = await transformFileAsync(
-    resolve(fixtureDir, 'input.js'),
-    options,
-  );
+  const {code: inputCode} = await transformFileAsync(resolve(fixtureDir, 'input.js'), options);
   const outputCode = await readFileAsync(resolve(fixtureDir, 'output.js'), 'utf8');
 
   expect(inputCode).toBe(outputCode.trim());
