@@ -1,8 +1,27 @@
 const {transformFileAsync} = require('@babel/core');
+const {readFile} = require('fs');
 const {resolve} = require('path');
+const {promisify} = require('util');
+
+const readFileAsync = promisify(readFile);
+
+const getOptions = fixture => require(resolve(__dirname, 'fixtures', fixture, 'options.js'));
+
+const compare = async fixture => {
+  const options = getOptions(fixture);
+  const fixtureDir = resolve(__dirname, 'fixtures', fixture);
+
+  const {code: inputCode} = await transformFileAsync(
+    resolve(fixtureDir, 'input.js'),
+    options,
+  );
+  const outputCode = await readFileAsync(resolve(fixtureDir, 'output.js'), 'utf8');
+
+  expect(inputCode).toBe(outputCode.trim());
+};
 
 const execute = async fixture => {
-  const options = require(resolve(__dirname, 'fixtures', fixture, 'options.js'));
+  const options = getOptions(fixture);
   const {code} = await transformFileAsync(
     resolve(__dirname, 'fixtures', fixture, 'exec.js'),
     options,
@@ -53,5 +72,9 @@ describe('babel-plugin-inject-decorator-initializer', () => {
 
   it('allows to define custom injectors property name', async () => {
     await execute('injectors-prop-name');
+  });
+
+  it('allows to import injector module instead of generating code in place', async () => {
+    await compare('use-import');
   });
 });

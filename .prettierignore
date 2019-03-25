@@ -1,5 +1,4 @@
 *.md
 *.json
 *.yml
-packages/**/node_modules/**/*
-packages/**/lib/**/*
+__tests__/fixtures/**/output.js

@@ -29,6 +29,7 @@
     "@babel/plugin-proposal-decorators": "^7.4.0"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-decorators": "^7.2.0",
     "codecov": "^3.2.0",
     "eslint": "^5.15.3",
     "eslint-config-poetez": "^0.1.3",
