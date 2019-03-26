@@ -1,8 +1,8 @@
 import _injectDecoratorInitializer from "@corpuscule/babel-preset/lib/runtime-injector";
 
 function dec(cls) {
-  cls.__injectors.push(function () {
-    this.foo = 'bar';
+  cls.__injectors.push(self => {
+    self.foo = 'bar';
   });
 }
 

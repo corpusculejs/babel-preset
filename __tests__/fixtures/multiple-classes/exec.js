@@ -1,7 +1,7 @@
 function dec(value) {
   return cls => {
-    cls.__injectors.push(function() {
-      this.foo = value;
+    cls.__injectors.push(self => {
+      self.foo = value;
     });
   };
 }

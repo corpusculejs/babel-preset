@@ -4,8 +4,8 @@ const constructorSpy = jest.fn();
 const superConstructorSpy = jest.fn();
 
 function dec(cls) {
-  cls.__injectors.push(function() {
-    this.foo = 'bar';
+  cls.__injectors.push(self => {
+    self.foo = 'bar';
   });
 }
 

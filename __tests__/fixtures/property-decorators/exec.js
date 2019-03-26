@@ -1,9 +1,7 @@
 function dec({constructor: cls}, key) {
-  cls.__injectors = [
-    function() {
-      this[key] = 'bar';
-    },
-  ];
+  cls.__injectors.push(self => {
+    self[key] = 'bar';
+  });
 }
 
 class Cls {

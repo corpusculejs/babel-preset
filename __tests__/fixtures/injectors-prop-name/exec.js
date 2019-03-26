@@ -1,6 +1,6 @@
 function dec(cls) {
-  cls.__customInjectors.push(function() {
-    this.foo = 'bar';
+  cls.__customInjectors.push(self => {
+    self.foo = 'bar';
   });
 }
 

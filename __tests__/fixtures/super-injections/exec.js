@@ -1,10 +1,8 @@
 function dec(property, value) {
   return cls => {
-    cls.__injectors = [
-      function() {
-        this[property] = value;
-      },
-    ];
+    cls.__injectors.push(self => {
+      self[property] = value;
+    });
   };
 }
 
