@@ -1,3 +1,4 @@
 **/node_modules/**/*
 __tests__/fixtures/**/input.js
 __tests__/fixtures/**/output.js
+lib/runtime-injector.js
