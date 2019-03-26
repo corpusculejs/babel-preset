@@ -1,7 +1,7 @@
 import _injectDecoratorInitializer from "@corpuscule/babel-preset/lib/runtime-injector";
 
 function dec(cls) {
-  cls.__injectors.push(self => {
+  cls.__initializers.push(self => {
     self.foo = 'bar';
   });
 }
@@ -9,8 +9,11 @@ function dec(cls) {
 @dec
 class Cls {
   constructor() {
-    _injectDecoratorInitializer(this, Cls.__injectors);
+    _injectDecoratorInitializer(this, Cls.__initializers);
   }
 
-  static __injectors = [];
+  static __initializers = [];
+  static __registrations = [];
 }
+
+_injectDecoratorInitializer(Cls, Cls.__registrations);

@@ -1,6 +1,6 @@
 function dec(value) {
   return cls => {
-    cls.__injectors.push(self => {
+    cls.__initializers.push(self => {
       self.foo = value;
     });
   };

@@ -1,7 +1,7 @@
 const constructorSpy = jest.fn();
 
 function dec(cls) {
-  cls.__injectors.push(self => {
+  cls.__initializers.push(self => {
     self.foo = 'bar';
   });
 }

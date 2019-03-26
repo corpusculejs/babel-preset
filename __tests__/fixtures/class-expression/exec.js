@@ -4,8 +4,9 @@ function dec(cls) {
   });
 }
 
-@dec
-class Cls {}
+const Cls =
+  @dec
+  class {};
 
 const cls = new Cls();
 

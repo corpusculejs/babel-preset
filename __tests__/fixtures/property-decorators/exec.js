@@ -1,5 +1,5 @@
 function dec({constructor: cls}, key) {
-  cls.__injectors.push(self => {
+  cls.__initializers.push(self => {
     self[key] = 'bar';
   });
 }
