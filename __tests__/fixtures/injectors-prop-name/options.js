@@ -8,5 +8,6 @@ module.exports = {
       {injectorsPropName: '__customInjectors'},
     ],
     [require('@babel/plugin-proposal-decorators'), {legacy: true}],
+    [require('@babel/plugin-proposal-class-properties'), {loose: true}],
   ],
 };

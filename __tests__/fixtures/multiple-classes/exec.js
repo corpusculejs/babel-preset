@@ -1,10 +1,8 @@
 function dec(value) {
   return cls => {
-    cls.__injectors = [
-      function() {
-        this.foo = value;
-      },
-    ];
+    cls.__injectors.push(function() {
+      this.foo = value;
+    });
   };
 }
 

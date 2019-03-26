@@ -1,9 +1,7 @@
 function dec(cls) {
-  cls.__customInjectors = [
-    function() {
-      this.foo = 'bar';
-    },
-  ];
+  cls.__customInjectors.push(function() {
+    this.foo = 'bar';
+  });
 }
 
 @dec
