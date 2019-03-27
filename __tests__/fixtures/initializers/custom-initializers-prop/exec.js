@@ -1,5 +1,5 @@
 function dec(cls) {
-  cls.__customInjectors.push(self => {
+  cls.__customInitializers.push(self => {
     self.foo = 'bar';
   });
 }

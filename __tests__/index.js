@@ -5,11 +5,12 @@ const {promisify} = require('util');
 
 const readFileAsync = promisify(readFile);
 
-const getOptions = fixture => require(resolve(__dirname, 'fixtures', fixture, 'options.js'));
+const getOptions = (fixture, type) =>
+  require(resolve(__dirname, 'fixtures', type, fixture, 'options.js'));
 
-const compare = async fixture => {
-  const options = getOptions(fixture);
-  const fixtureDir = resolve(__dirname, 'fixtures', fixture);
+const compare = async (fixture, type) => {
+  const options = getOptions(fixture, type);
+  const fixtureDir = resolve(__dirname, 'fixtures', type, fixture);
 
   const {code: inputCode} = await transformFileAsync(resolve(fixtureDir, 'input.js'), options);
   const outputCode = await readFileAsync(resolve(fixtureDir, 'output.js'), 'utf8');
@@ -17,67 +18,99 @@ const compare = async fixture => {
   expect(inputCode).toBe(outputCode.trim());
 };
 
-const execute = async fixture => {
-  const options = getOptions(fixture);
+const execute = async (fixture, type) => {
+  const options = getOptions(fixture, type);
   const {code} = await transformFileAsync(
-    resolve(__dirname, 'fixtures', fixture, 'exec.js'),
+    resolve(__dirname, 'fixtures', type, fixture, 'exec.js'),
     options,
   );
   eval(code);
 };
 
 describe('babel-plugin-inject-decorator-initializer', () => {
-  describe('initializers', () => {
-    it('injects initializer into a class without constructor', async () => {
-      await execute('simple-class');
-    });
-
-    it('injects initializer into an extended class without constructor', async () => {
-      await execute('extended-class');
-    });
-
-    it('injects initializer into a class with constructor', async () => {
-      await execute('simple-with-constructor');
-    });
-
-    it('injects initializer into an extended class with constructor', async () => {
-      await execute('extended-with-constructor');
-    });
-
-    it('does not break the order of constructor statements', async () => {
-      await execute('extended-with-call-before-super');
-    });
-
-    it('does not break other class memebers', async () => {
-      await execute('keep-class-members');
-    });
-
-    it('works with multiple classes', async () => {
-      await execute('multiple-classes');
-    });
-
-    it('runs both extending class and super class initializers', async () => {
-      await execute('super-injections');
-    });
-
-    it('works with property decorators', async () => {
-      await execute('property-decorators');
-    });
-
-    it('runs initializers before user-defined constructor', async () => {
-      await execute('runs-before');
-    });
-
-    it('allows to define custom initializers property name', async () => {
-      await execute('custom-initializers-prop');
-    });
-
-    it('works with class expression', async () => {
-      await execute('class-expression');
+  describe('common', () => {
+    it('allows to import injector module instead of generating code in place', async () => {
+      await compare('use-import', 'common');
     });
   });
 
-  it('allows to import injector module instead of generating code in place', async () => {
-    await compare('use-import');
+  describe('initializers', () => {
+    it('works with a class without constructor', async () => {
+      await execute('simple-class', 'initializers');
+    });
+
+    it('works with an extended class without constructor', async () => {
+      await execute('extended-class', 'initializers');
+    });
+
+    it('works with a class with constructor', async () => {
+      await execute('simple-with-constructor', 'initializers');
+    });
+
+    it('works with an extended class with constructor', async () => {
+      await execute('extended-with-constructor', 'initializers');
+    });
+
+    it('works with multiple classes', async () => {
+      await execute('multiple-classes', 'initializers');
+    });
+
+    it('works with property decorators', async () => {
+      await execute('property-decorators', 'initializers');
+    });
+
+    it('does not break the order of constructor statements', async () => {
+      await execute('extended-with-call-before-super', 'initializers');
+    });
+
+    it('does not break other class memebers', async () => {
+      await execute('keep-class-members', 'initializers');
+    });
+
+    it('runs both extending class and super class initializers', async () => {
+      await execute('super-injections', 'initializers');
+    });
+
+    it('runs initializers before user-defined constructor', async () => {
+      await execute('runs-before', 'initializers');
+    });
+
+    it('allows to define custom initializers property name', async () => {
+      await execute('custom-initializers-prop', 'initializers');
+    });
+
+    it('works with class expression', async () => {
+      await execute('class-expression', 'initializers');
+    });
+  });
+
+  describe('registrations', () => {
+    it('works with a class without constructor', async () => {
+      await execute('simple-class', 'registrations');
+    });
+
+    it('works with an extended class', async () => {
+      await execute('extended-class', 'registrations');
+    });
+
+    it('works with multiple classes', async () => {
+      await execute('multiple-classes', 'registrations');
+    });
+
+    it('works with property decorators', async () => {
+      await execute('property-decorators', 'registrations');
+    });
+
+    it('allows to define custom registrations property name', async () => {
+      await execute('custom-registrations-prop', 'registrations');
+    });
+
+    it('works with class expression', async () => {
+      await execute('class-expression', 'registrations');
+    });
+
+    it('does not break other class memebers', async () => {
+      await execute('keep-class-members', 'registrations');
+    });
   });
 });
