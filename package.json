@@ -1,7 +1,7 @@
 {
   "name": "@corpuscule/babel-preset",
   "version": "0.1.0",
-  "description": "A babel preset to develop Corpuscule project smoothly",
+  "description": "Babel preset for compiling Corpuscule projects",
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint {src,__tests__}/**/*.js",
@@ -15,14 +15,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/corpusculejs/babel-preset-corpuscule.git"
+    "url": "git+https://github.com/corpusculejs/babel-preset.git"
   },
   "author": "Vlad Rindevich <rindevich.vs@gmail.com> (https://github.com/Lodin)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/corpusculejs/babel-preset-corpuscule/issues"
+    "url": "https://github.com/corpusculejs/babel-preset/issues"
   },
-  "homepage": "https://github.com/corpusculejs/babel-preset-corpuscule#readme",
+  "homepage": "https://github.com/corpusculejs/babel-preset#readme",
   "dependencies": {
     "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
