@@ -1,3 +1,7 @@
+> ## 🛠 Status: In Development
+> @corpuscule/babel-preset is currently under heavy development. Feedback is always welcome, but be careful with
+using it in production. API is not ready yet and can receive large changes.
+
 # @corpuscule/babel-preset
 [![Latest Stable Version](https://img.shields.io/npm/v/@corpuscule/babel-preset.svg)](https://www.npmjs.com/package/@corpuscule/babel-preset)
 [![Build Status](https://travis-ci.com/corpusculejs/babel-preset.svg?branch=master)](https://travis-ci.org/corpusculejs/babel-preset)
