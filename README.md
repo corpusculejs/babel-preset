@@ -1,6 +1,6 @@
 > ## 🛠 Status: In Development
-> @corpuscule/babel-preset is currently under heavy development. Feedback is always welcome, but be careful with
-using it in production. API is not ready yet and can receive large changes.
+> @corpuscule/babel-preset is currently under development. Feedback is always welcome, but be careful with
+using it in production.
 
 # @corpuscule/babel-preset
 [![Latest Stable Version](https://img.shields.io/npm/v/@corpuscule/babel-preset.svg)](https://www.npmjs.com/package/@corpuscule/babel-preset)
@@ -30,7 +30,7 @@ compiler they will be incompatible. Implementation of the new syntax requires de
 that Corpuscule will also wait until it happens.
 
 ### Plugins
-* `babel-plugin-inject-decorator-initializer`.
+* `babel-plugin-inject-decorator-initializer`. Description see [below](#babel-plugin-inject-decorator-initializer).
 * [`@babel/plugin-proposal-decorators`](https://babeljs.io/docs/en/babel-plugin-proposal-decorators) (in a `legacy`
 mode).
 * [`@babel/plugin-proposal-class-properties`](https://babeljs.io/docs/en/babel-plugin-proposal-class-properties) (in a
