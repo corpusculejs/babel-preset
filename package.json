@@ -30,6 +30,8 @@
   },
   "devDependencies": {
     "@babel/plugin-syntax-decorators": "^7.2.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "codecov": "^3.3.0",
     "eslint": "^5.16.0",
     "eslint-config-poetez": "^0.1.3",

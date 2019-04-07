@@ -32,6 +32,14 @@ describe('babel-plugin-inject-decorator-initializer', () => {
     it('allows to import injector module instead of generating code in place', async () => {
       await compare('use-import', 'common');
     });
+
+    it('works correctly with env preset', async () => {
+      await execute('preset-env', 'common');
+    });
+
+    it('correctly transforms injector import to commonjs', async () => {
+      await compare('commonjs-import', 'common');
+    });
   });
 
   describe('initializers', () => {
