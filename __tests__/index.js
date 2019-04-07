@@ -40,6 +40,10 @@ describe('babel-plugin-inject-decorator-initializer', () => {
     it('correctly transforms injector import to commonjs', async () => {
       await compare('commonjs-import', 'common');
     });
+
+    it('does not create a function declaration/import if there is no decorator in the file', async () => {
+      await compare('no-decorators', 'common');
+    });
   });
 
   describe('initializers', () => {
