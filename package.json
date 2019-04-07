@@ -1,6 +1,6 @@
 {
   "name": "@corpuscule/babel-preset",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Babel preset for compiling Corpuscule projects",
   "main": "lib/index.js",
   "scripts": {
