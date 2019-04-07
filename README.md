@@ -14,7 +14,7 @@ Babel plugins preset that allows working with the [Corpuscule](https://github.co
 ## Rationale
 ### History
 The earlier versions of Corpuscule used the [second decorator proposal](https://github.com/tc39/proposal-decorators/tree/7fa580b40f2c19c561511ea2c978e307ae689a1b).
-However, on January 2019, this proposal was deprecated due to the complexity and potential performance penalty, and
+However, in January 2019, this proposal was deprecated due to the complexity and potential performance penalty, and
 work on the third proposal was started.
 
 Due to the beginning state of the new specification, the absence of the Babel implementation of it, it was decided to
