@@ -44,6 +44,10 @@ describe('babel-plugin-inject-decorator-initializer', () => {
     it('does not create a function declaration/import if there is no decorator in the file', async () => {
       await compare('no-decorators', 'common');
     });
+
+    it('does not duplicate function declaration with multiple decorators', async () => {
+      await compare('multiple-decorators', 'common');
+    });
   });
 
   describe('initializers', () => {
